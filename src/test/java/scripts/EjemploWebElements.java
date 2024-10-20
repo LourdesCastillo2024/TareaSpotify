@@ -124,13 +124,13 @@ public class EjemploWebElements {
         Thread.sleep(2000);
         driver.findElement(By.id("year")).sendKeys("1980"); //Año nac
         Thread.sleep(2000);
-        //Genero
+        //Genero Mujer
         WebElement rbtnGenero;
         //By byrbtnGenero = By.cssSelector("input[type='radio'][value='Mujer']"); //genero Mujer
         //By byrbtnGenero = By.className("Indicator-sc-hjfusp-0 jRuGOG");
         //By byrbtnGenero = By.xpath("<span class=\"Indicator-sc-hjfusp-0 jRuGOG\"></span>");
         //By byrbtnGenero = By.id("gender_option_female");
-        //By byrbtnGenero = By.xpath("//input[@type='radio' and @value='female']");
+        //By byrbtnGenero = By.xpath("//input[id='gender_option_female' and @type='radio' and @value='female']");
         //By byrbtnGenero = By.className("Radio-sc-tr5kfi-0 icoMsB");
         //By byrbtnGenero = By.xpath("Indicator-sc-hjfusp-0 jRuGOG");
         //By byrbtnGenero = By.xpath("//div[@class='Radio-sc-tr5kfi-0 icoMsB']/input[@type='radio'][@value='female']");
@@ -139,13 +139,68 @@ public class EjemploWebElements {
         //By byrbtnGenero = By.xpath("//label[text()='gender_option_female']/precending-sibling::input[@type='radio']");
         //By byrbtnGenero = By.xpath("//label[text()='Mujer']/precending-sibling::input[@type='radio']");
         //By byrbtnGenero = By.xpath("//input[@id='gender_option_female']");
-        By byrbtnGenero = By.className("Indicator-sc-hjfusp-0 jRuGOG");
+        //By byrbtnGenero = By.className("Indicator-sc-hjfusp-0 jRuGOG");
+        //By byrbtnGenero = By.xpath("//span [@class='Indicator-sc-hjfusp-0 jRuGOG'");
+        //By byrbtnGenero = By.xpath("//input[@type='radio' and id='gender_option_female' and @name='gender']");
+        By byrbtnGenero = By.cssSelector("input[type='radio'][id='gender_option_female'][value='female']");
         rbtnGenero = driver.findElement(byrbtnGenero);
         rbtnGenero.click();
         Thread.sleep(2000);
 
     }
 
+    @Test
+    public void CP003_HAZTECLIENTE() throws InterruptedException{
+        //Caso de prueba para registrarse como cliente del Banco BCI a través de la página web
+        //Ruta del proyecto
+        String rutaProyecto = System.getProperty("user.dir");
+        String rutaDriver = rutaProyecto+
+                "\\src\\test\\resources\\drivers\\chromedriver.exe";
+
+        //Enlazar el webDriver al browser de nuestro sistema
+        System.setProperty("webdriver.chrome.driver",rutaDriver);
+
+        //Instanciar un objeto que represente al browser (driver)
+        WebDriver driver = new ChromeDriver();
+
+        driver.get("https://www.bci.cl/personas");
+        driver.manage().window().maximize();
+
+        //espere 5 segundos
+        Thread.sleep(5000);
+
+        //clic en el link "Hazte cliente"
+        WebElement btnHazteCliente;
+        By byBtnHazteCliente = By.xpath("//a[contains(text(),'Hazte Cliente')]");
+        btnHazteCliente = driver.findElement(byBtnHazteCliente);
+        btnHazteCliente.click();
+        Thread.sleep(3000);
+        //Rut
+        //WebElement rut;
+        //By byRut = By.xpath("//input[@name='rut'");
+        //driver.findElement(byRut).sendKeys("255740938");
+        //driver.findElement(By.xpath("//input[@type='text']")).sendKeys("255740938");
+        //driver.findElement(By.xpath("//input [@div ='_ngcontent-ypx-c38'] @class = 'btn-clean'")).sendKeys("255740938");
+        //driver.findElement(By.className("bci-up ng-dirty ng-valid ng-touched")).sendKeys("255740938");
+        //By byRut = By.xpath("div _ngcontent-ypx-c38");
+        //driver.findElement(byRut).sendKeys("255740938");
+        //driver.findElement()
+        //and @type='text' and placeholder='Ingresa tu RUT'
+        //By locator = By.xpath("//input[@class='ng-invalid ng-touched ng-dirty']");
+        //By locator = By.className("ng-invalid ng-touched ng-dirty");
+        By locator = By.xpath("//input[@type='text' and @placeholder='Ingresa tu Rut']");
+        driver.findElement(locator).sendKeys("255740938");
+//telefono
+        //By telefono = By.className("bci-wk-oneAreCode");
+        //driver.findElement(telefono).sendKeys("999999999");
+//email
+        //WebElement elemento = driver.findElement(By.cssSelector("input[type='email'][placeholder='Ingresa tu email']"));
+        //driver.findElement((By) elemento).sendKeys("test@test.com");
+
+        //Thread.sleep(3000);
+        driver.quit();
+
+    }
     public static String corregirEncoding(String textoIncorrecto) {
         // Convertir la cadena incorrecta de la codificación ISO-8859-1 a UTF-8
         byte[] bytes = textoIncorrecto.getBytes(StandardCharsets.ISO_8859_1);
